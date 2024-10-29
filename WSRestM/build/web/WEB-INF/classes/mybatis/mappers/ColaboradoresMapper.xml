@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="colaborador">
+    <select id="obenerColaboradores"  resultType="modelo.pojo.Colaborador">
+        SELECT * FROM colaborador
+    </select>
+    
+    <select id="obtenerColaboradorPorNumeroPersonal" parameterType="String" resultType="modelo.pojo.Colaborador">
+        SELECT * FROM colaborador WHERE numeroPersonal = #{numeroPersonal}
+    </select>
+    
+    <insert id="agregarColaborador" parameterType="modelo.pojo.Colaborador">
+        INSERT INTO colaborador (nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, numeroPersonal, telefono, peso, estatura, correo, password, rfc, curp, idRol) 
+        VALUES (#{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{fechaNacimiento}, #{telefono}, #{numeroPersonal}, #{peso}, #{estatura}, #{correo}, #{password}, #{rfc}, #{curp}, #{idRol})
+    </insert>
+    <update id="editarColaborador" parameterType="modelo.pojo.Colaborador">
+        UPDATE colaborador 
+        SET nombre = #{nombre},
+            apellidoPaterno = #{apellidoPaterno},
+            apellidoMaterno = #{apellidoMaterno},
+            fechaNacimiento = #{fechaNacimiento},
+            telefono = #{telefono},
+            peso = #{peso},
+            estatura = #{estatura},
+            correo = #{correo},
+            password = #{password},
+            rfc = #{rfc},
+            curp = #{curp},
+            idRol = #{idRol}
+        WHERE numeroPersonal = #{numeroPersonal}
+    </update>
+    <delete id="eliminarColaborador" parameterType="Integer">
+        DELETE FROM colaborador WHERE idColaborador = #{idColaborador}
+    </delete>
+</mapper>

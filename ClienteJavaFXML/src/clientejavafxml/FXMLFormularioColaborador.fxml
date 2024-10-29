@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="561.0" prefWidth="944.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="clientejavafxml.FXMLFormularioColaboradorController">
+   <children>
+      <Label layoutX="72.0" layoutY="133.0" text="No. Personal" />
+      <Label layoutX="701.0" layoutY="133.0" text="Apellido Materno" />
+      <Label layoutX="472.0" layoutY="133.0" text="Apellido Paterno" />
+      <Label layoutX="269.0" layoutY="133.0" text="Nombre" />
+      <Label layoutX="77.0" layoutY="410.0" text="Contraseña" />
+      <ComboBox fx:id="cbRol" layoutX="469.0" layoutY="447.0" prefWidth="150.0" />
+      <DatePicker fx:id="dpFechaNacimiento" layoutX="240.0" layoutY="447.0" prefHeight="31.0" prefWidth="150.0" />
+      <Label layoutX="735.0" layoutY="260.0" text="CURP" />
+      <Label layoutX="531.0" layoutY="260.0" text="RFC" />
+      <Label layoutX="263.0" layoutY="260.0" text="Correo Electronico" />
+      <Label layoutX="85.0" layoutY="260.0" text="Telefono" />
+      <TextField fx:id="tfTelefono" layoutX="24.0" layoutY="298.0" prefHeight="31.0" prefWidth="190.0" />
+      <TextField fx:id="tfNoPersonal" layoutX="24.0" layoutY="182.0" prefHeight="31.0" prefWidth="184.0" />
+      <TextField fx:id="tfNombre" layoutX="223.0" layoutY="182.0" prefHeight="31.0" prefWidth="184.0" />
+      <TextField fx:id="tfCorreo" layoutX="221.0" layoutY="298.0" prefHeight="31.0" prefWidth="210.0" />
+      <TextField fx:id="tfApellidoPaterno" layoutX="420.0" layoutY="182.0" prefHeight="31.0" prefWidth="203.0" />
+      <TextField fx:id="tfApellidoMaterno" layoutX="658.0" layoutY="182.0" prefHeight="31.0" prefWidth="227.0" />
+      <TextField fx:id="tfRFC" layoutX="449.0" layoutY="298.0" prefHeight="31.0" prefWidth="190.0" />
+      <TextField fx:id="tfCURP" layoutX="664.0" layoutY="298.0" prefHeight="31.0" prefWidth="190.0" />
+      <Label layoutX="527.0" layoutY="410.0" text="Rol" />
+      <Label layoutX="247.0" layoutY="410.0" text="Fecha de nacimiento" />
+      <TextField fx:id="tfPassword" layoutX="21.0" layoutY="447.0" prefHeight="31.0" prefWidth="190.0" />
+      <Button layoutX="772.0" layoutY="463.0" mnemonicParsing="false" onAction="#clicGuardarColaborador" text="GUARDAR" />
+   </children>
+</AnchorPane>
