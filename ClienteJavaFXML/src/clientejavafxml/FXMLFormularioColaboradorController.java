@@ -7,6 +7,7 @@ package clientejavafxml;
 
 import clientejavafxml.utilidades.Utilidades;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -59,7 +60,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
     private NotificadorOperaciones observador;
     private Colaborador colaboradorEdicion;
     private boolean isEditable = false;
-    List<Rol> roles = RolDAO.obtenerRol();
+    ObservableList<Rol> tiposColaboradores;
 
     /**
      * Initializes the controller class.
@@ -91,11 +92,23 @@ public class FXMLFormularioColaboradorController implements Initializable {
         tfRFC.setText(colaboradorEdicion.getRfc());
         tfTelefono.setText(colaboradorEdicion.getTelefono());
 
+        dpFechaNacimiento.setValue(LocalDate.parse(colaboradorEdicion.getFechaNacimiento()));
+
+        /*
         int idRol = colaboradorEdicion.getIdRol();
         if (idRol > 0 && idRol <= cbRol.getItems().size()) {
             cbRol.getSelectionModel().select(idRol - 1);
-        }
+        }*/
+        cbRol.getSelectionModel().select(buscarRol(colaboradorEdicion.getIdRol()));
+    }
 
+    private int buscarRol(int idRol) {
+        for (int i = 0; i < tiposColaboradores.size(); i++) {
+            if (tiposColaboradores.get(i).getIdRol() == idRol) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     private void cargarTiposUsuario() {
@@ -104,10 +117,11 @@ public class FXMLFormularioColaboradorController implements Initializable {
         tipoColaboradores.add(new Rol(1, "Colaborador General"));
         tipoColaboradores.add(new Rol(2, "Entrenador"));
         cbRol.setItems(tipoColaboradores);*/
+        List<Rol> roles = RolDAO.obtenerRol();
 
         if (roles != null && !roles.isEmpty()) {
-            ObservableList<Rol> listaObservableRoles = FXCollections.observableArrayList(roles);
-            cbRol.setItems(listaObservableRoles);
+            tiposColaboradores = FXCollections.observableArrayList(roles);
+            cbRol.setItems(tiposColaboradores);
         } else {
             Utilidades.AletaSimple(Alert.AlertType.ERROR, "Hubo un error al momento de cargar los roles, intentelo nuevamente", "Error al cargar");
         }
@@ -124,7 +138,18 @@ public class FXMLFormularioColaboradorController implements Initializable {
             cerrarVentana();
             observador.notificacionOperacion("Nuevo registro", colaborador.getNombre());
         } else {
-            Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error alñ guardar");
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al guardar");
+        }
+    }
+
+    private void editarDatosColaborador(Colaborador colaborador) {
+        Mensaje mjs = ColaboradorDAO.editarColaborador(colaborador);
+        if (!mjs.isError()) {
+            Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha editado con exito", "Edicion exitoso");
+            cerrarVentana();
+            observador.notificacionOperacion("Nueva edicion", colaborador.getNombre());
+        } else {
+            Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al guardar");
         }
     }
 
@@ -164,7 +189,12 @@ public class FXMLFormularioColaboradorController implements Initializable {
         colaborador.setIdRol(idRol);
 
         if (validarCampos(colaborador)) {
-            guardarDatos(colaborador);
+            if (isEditable) {
+                colaborador.setIdColaborador(this.colaboradorEdicion.getIdColaborador());
+                editarDatosColaborador(colaborador);
+            } else {
+                guardarDatos(colaborador);
+            }
         } else {
             Utilidades.AletaSimple(Alert.AlertType.WARNING, "Error en la validacion de los datos, porfavor ingrese nuevamente la informacion", "ERROR");
         }

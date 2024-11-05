@@ -148,7 +148,34 @@ public class ConexionHTTP {
         }
         return respuesta; // Devuelve la respuesta de la petición DELETE
     }
-    
+    public static RespuestaHTTP peticionDELETE(String url) {
+    RespuestaHTTP respuesta = new RespuestaHTTP(); // Objeto para almacenar la respuesta HTTP
+    try {
+        // Crear una conexión a la URL especificada
+        URL urlDestino = new URL(url);
+        HttpURLConnection conexionHttp = (HttpURLConnection) urlDestino.openConnection();
+        conexionHttp.setRequestMethod("DELETE"); // Establece el método de la petición como DELETE
+        conexionHttp.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); // Define el tipo de contenido
+
+        int codigoRespuesta = conexionHttp.getResponseCode(); // Obtiene el código de respuesta
+        respuesta.setCodigoRespuesta(codigoRespuesta); // Asigna el código de respuesta
+
+        // Verifica si la respuesta fue exitosa
+        if (codigoRespuesta == HttpURLConnection.HTTP_OK) {
+            respuesta.setContenido(obtenerContenidoWS(conexionHttp.getInputStream())); // Asigna el contenido de la respuesta
+        } else {
+            respuesta.setContenido("Código de respuesta HTTP: " + codigoRespuesta); // Mensaje de error en caso de fallo
+        }
+    } catch (MalformedURLException e) {
+        respuesta.setCodigoRespuesta(Constantes.ERROR_URL); // Error si la URL es inválida
+        respuesta.setContenido("Error en la dirección de conexión.");
+    } catch (IOException io) {
+        respuesta.setCodigoRespuesta(Constantes.ERROR_PETICION); // Error si hay problemas en la conexión
+        respuesta.setContenido("Error: no se pudo realizar la solicitud correspondiente.");
+    }
+    return respuesta; // Devuelve la respuesta de la petición DELETE
+}
+
       // Método para realizar una petición POST a una URL
     public static RespuestaHTTP peticionPOSTJson(String url, String parametros) {
         RespuestaHTTP respuesta = new RespuestaHTTP(); // Objeto para almacenar la respuesta HTTP
@@ -185,6 +212,41 @@ public class ConexionHTTP {
         return respuesta; // Devuelve la respuesta de la petición POST
     }
     
+     // Método para realizar una petición PUT a una URL
+    public static RespuestaHTTP peticionPUTJSON(String url, String parametros) {
+        RespuestaHTTP respuesta = new RespuestaHTTP(); // Objeto para almacenar la respuesta HTTP
+        try {
+            // Crear una conexión a la URL especificada
+            URL urlDestino = new URL(url);
+            HttpURLConnection conexionHttp = (HttpURLConnection) urlDestino.openConnection();
+            conexionHttp.setRequestMethod("PUT"); // Establece el método de la petición como PUT
+            conexionHttp.setRequestProperty("Content-Type", "application/json"); // Define el tipo de contenido
+            conexionHttp.setDoOutput(true); // Habilita el envío de datos
+            
+            // Enviar los parámetros de la petición
+            OutputStream os = conexionHttp.getOutputStream();
+            os.write(parametros.getBytes());
+            os.flush();
+            os.close();
+            
+            int codigoRespuesta = conexionHttp.getResponseCode(); // Obtiene el código de respuesta
+            respuesta.setCodigoRespuesta(codigoRespuesta); // Asigna el código de respuesta
+            
+            // Verifica si la respuesta fue exitosa
+            if (codigoRespuesta == HttpURLConnection.HTTP_OK) {
+                respuesta.setContenido(obtenerContenidoWS(conexionHttp.getInputStream())); // Asigna el contenido de la respuesta
+            } else {
+                respuesta.setContenido("Código de respuesta HTTP: " + codigoRespuesta); // Mensaje de error en caso de fallo
+            }
+        } catch (MalformedURLException e) {
+            respuesta.setCodigoRespuesta(Constantes.ERROR_URL); // Error si la URL es inválida
+            respuesta.setContenido("Error en la dirección de conexión.");
+        } catch (IOException io) {
+            respuesta.setCodigoRespuesta(Constantes.ERROR_PETICION); // Error si hay problemas en la conexión
+            respuesta.setContenido("Error: no se pudo realizar la solicitud correspondiente.");
+        }
+        return respuesta; // Devuelve la respuesta de la petición PUT
+    }
     
     // Método privado para obtener el contenido de la respuesta del servicio web
     private static String obtenerContenidoWS(InputStream inputWS) throws IOException {

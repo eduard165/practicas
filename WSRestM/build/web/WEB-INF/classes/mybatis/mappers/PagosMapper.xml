@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pagos">
+    <select id="obenerTodos"  resultType="modelo.pojo.Pago">
+        SELECT p.idPago, DATE_FORMAT(p.fechaPago,'%d/%m/%Y') AS fechaPago, c.idCliente, p.monto, t.idTipoPago, p.descuento,  
+        CONCAT(c.nombre,' ', c.apellidoPaterno,' ',c.apellidoMaterno) AS cliente, t.pago AS tipoPago,  
+        CONCAT(t.descuento,'%') AS porcentajeDescuento 
+        FROM pago p
+        INNER JOIN cliente  c
+        ON c.idCliente = p.idCliente
+        INNER JOIN tipoPago t
+        ON t.idTipoPago = p.idTipoPago;
+    </select>
+     <select id="obenerPagoPorCliente"  resultType="modelo.pojo.Pago" paramerType="int">
+        SELECT p.idPago,DATE_FORMAT(p.fechaPago,'%d/%m/%Y') AS fechaPago, c.idCliente, p.monto, t.idTipoPago, p.descuento,  
+        CONCAT(c.nombre,' ', c.apellidoPaterno,' ',c.apellidoMaterno) AS cliente, t.pago AS tipoPago,  
+        CONCAT(t.descuento,'%') AS porcentajeDescuento 
+        FROM pago p
+        INNER JOIN cliente  c
+        ON c.idCliente = p.idCliente
+        INNER JOIN tipoPago t
+        ON t.idTipoPago = p.idTipoPago;
+        WHERE p.idCliente = #{idCliente}
+    </select>
+</mapper>

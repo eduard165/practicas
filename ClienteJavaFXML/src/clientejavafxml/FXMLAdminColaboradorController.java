@@ -8,7 +8,6 @@ package clientejavafxml;
 import clientejavafxml.utilidades.Utilidades;
 import java.net.URL;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.dao.ColaboradorDAO;
 import modelo.pojo.Colaborador;
+import modelo.pojo.Mensaje;
 import observador.NotificadorOperaciones;
 
 /**
@@ -81,6 +81,20 @@ public class FXMLAdminColaboradorController implements Initializable, Notificado
 
     @FXML
     private void eliminarColaborador(ActionEvent event) {
+        Colaborador colaborador = tblColaboradores.getSelectionModel().getSelectedItem();
+
+        if (colaborador != null) {
+            Mensaje mjs = ColaboradorDAO.eliminarColaborador(colaborador.getIdColaborador());
+
+            if (!mjs.isError()) {
+                Utilidades.AletaSimple(Alert.AlertType.INFORMATION, "El colaborador se ha eliminado con exito", "Eliminacion exitosa");
+                cargarInformacionTabla();
+            } else {
+                Utilidades.AletaSimple(Alert.AlertType.ERROR, mjs.getContenido(), "Error al eliminar");
+            }
+        } else {
+            Utilidades.AletaSimple(Alert.AlertType.WARNING, "SELECCIONE UN ELEMENTO EN LA TABLA PARA CONTINUAR", "Error");
+        }
     }
 
     private void configurarTabla() {

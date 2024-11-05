@@ -62,4 +62,44 @@ public class ColaboradorDAO {
         return mensaje;
     }
 
+    public static Mensaje editarColaborador(Colaborador colaborador) {
+        Mensaje mensaje = new Mensaje();
+        String url = Constantes.URL_WS + "colaboradores/editar";
+        Gson gson = new Gson();
+        try {
+            String parametros = gson.toJson(colaborador);
+            RespuestaHTTP respuesta = ConexionHTTP.peticionPUTJSON(url, parametros);
+            if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                mensaje = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            } else {
+                mensaje.setError(true);
+                mensaje.setContenido(respuesta.getContenido());
+            }
+        } catch (Exception e) {
+            mensaje.setError(true);
+            mensaje.setContenido(e.getMessage());
+        }
+
+        return mensaje;
+    }
+
+    public static Mensaje eliminarColaborador(int idColaborador) {
+        Mensaje mensaje = new Mensaje();
+        String url = Constantes.URL_WS + "colaboradores/eliminar/" + idColaborador;
+        Gson gson = new Gson();
+        try {
+            RespuestaHTTP respuesta = ConexionHTTP.peticionDELETE(url);
+            if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                mensaje = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            } else {
+                mensaje.setError(true);
+                mensaje.setContenido(respuesta.getContenido());
+            }
+        } catch (Exception e) {
+            mensaje.setError(true);
+            mensaje.setContenido(e.getMessage());
+        }
+
+        return mensaje;
+    }
 }

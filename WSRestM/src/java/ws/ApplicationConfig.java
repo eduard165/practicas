@@ -17,6 +17,7 @@ public class ApplicationConfig extends Application {
         resources.add(ws.WSCliente.class);
         resources.add(ws.WSColaboradores.class);
         resources.add(ws.WSLogin.class);
+        resources.add(ws.WSPagos.class);
         resources.add(ws.WSRol.class);
     }
     
