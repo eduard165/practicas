@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rutina">
+    <select id="obtenerRutinas" resultType="modelo.pojo.Rutina">
+        SELECT 
+        r.idRuina,
+        r.nombre,
+        r.numeroEjercicios,
+        r.repeticiones,
+        a.nombre AS nombreAparato,
+        c.nombre AS nombreCliente,
+        c.apellidoPaterno AS apellidoCliente,
+        col.nombre AS nombreColaborador,
+        col.apellidoPaterno AS apellidoColaborador
+        FROM rutina r
+        INNER JOIN aparato a ON r.idAparato = a.idAparato
+        INNER JOIN cliente c ON r.idCliente = c.idCliente
+        INNER JOIN colaborador col ON r.idColaborador = col.idColaborador
+    </select>
+    <select id="obtenerRutinasCliente" parameterType="Integer" resultType="modelo.pojo.Rutina">
+        SELECT 
+        r.idRuina,
+        r.nombre,
+        r.numeroEjercicios,
+        r.repeticiones,
+        a.nombre AS nombreAparato,
+        c.nombre AS nombreCliente,
+        c.apellidoPaterno AS apellidoCliente,
+        col.nombre AS nombreColaborador,
+        col.apellidoPaterno AS apellidoColaborador
+        FROM rutina r
+        INNER JOIN aparato a ON r.idAparato = a.idAparato
+        INNER JOIN cliente c ON r.idCliente = c.idCliente
+        INNER JOIN colaborador col ON r.idColaborador = col.idColaborador
+        WHERE r.idCliente = #{idCliente}
+    </select>
+
+</mapper>

@@ -3,15 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/mybatis/mappers/RutinasMapper.xml</file>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/mybatis/mappers/ColaboradoresMapper.xml</file>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/mybatis/mappers/RolMapper.xml</file>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/modelo/pojo/Cliente.java</file>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/modelo/RutinaDAO.java</file>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/ws/WSPagos.java</file>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/modelo/PagosDAO.java</file>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/ws/WSRutina.java</file>
             <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/mybatis/mappers/PagosMapper.xml</file>
-            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/ws/WSLogin.java</file>
             <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/mybatis/mappers/AutenticacionMapper.xml</file>
             <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/modelo/pojo/Pago.java</file>
             <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/ws/WSRol.java</file>
-            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/modelo/RolDAO.java</file>
             <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/mybatis/mybatis_conf.xml</file>
-            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/ws/WSPagos.java</file>
-            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/modelo/PagosDAO.java</file>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/mybatis/mappers/ClienteMapper.xml</file>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/ws/WSCliente.java</file>
+            <file>file:/D:/Documentos/Integracion%202024%20Octubre/practicas/WSRestM/src/java/modelo/pojo/Rutina.java</file>
         </group>
     </open-files>
 </project-private>

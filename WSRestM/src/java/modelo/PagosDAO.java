@@ -25,7 +25,7 @@ public class PagosDAO {
 
         if (conexionBD != null) {
             try {
-                pagos = conexionBD.selectList("pagos.obtenerTodos");
+                pagos = conexionBD.selectList("pagos.obenerTodos");
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

@@ -1,4 +1,3 @@
-
 package ws;
 
 import java.util.List;
@@ -10,20 +9,21 @@ import javax.ws.rs.core.MediaType;
 import modelo.PagosDAO;
 import modelo.pojo.Pago;
 
-@Path("pagos") 
+@Path("pagos")
 
 public class WSPagos {
-     @Path("/obtener-roles")
+
+    @Path("/obtener-pagos")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Pago> loginColaborador() {
+    public List<Pago> pagosTodos() {
         return PagosDAO.obtenerPagos();
     }
-    
-      @Path("/obtener-roles")
+
+    @Path("/obtener-pagos-por-cliente/{idCliente}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-      public List<Pago> obtenerPagosCliente(@PathParam("idCliente") Integer idCliente){
-          return PagosDAO.obtenerPagos(idCliente);
-      }
+    public List<Pago> obtenerPagosCliente(@PathParam("idCliente") Integer idCliente) {
+        return PagosDAO.obtenerPagos(idCliente);
+    }
 }

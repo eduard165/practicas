@@ -12,9 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN cliente  c
         ON c.idCliente = p.idCliente
         INNER JOIN tipoPago t
-        ON t.idTipoPago = p.idTipoPago;
+        ON t.idTipoPago = p.idTipoPago
     </select>
-     <select id="obenerPagoPorCliente"  resultType="modelo.pojo.Pago" paramerType="int">
+     <select id="obenerPagoPorCliente"  resultType="modelo.pojo.Pago" parameterType="int">
         SELECT p.idPago,DATE_FORMAT(p.fechaPago,'%d/%m/%Y') AS fechaPago, c.idCliente, p.monto, t.idTipoPago, p.descuento,  
         CONCAT(c.nombre,' ', c.apellidoPaterno,' ',c.apellidoMaterno) AS cliente, t.pago AS tipoPago,  
         CONCAT(t.descuento,'%') AS porcentajeDescuento 
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN cliente  c
         ON c.idCliente = p.idCliente
         INNER JOIN tipoPago t
-        ON t.idTipoPago = p.idTipoPago;
+        ON t.idTipoPago = p.idTipoPago
         WHERE p.idCliente = #{idCliente}
     </select>
 </mapper>

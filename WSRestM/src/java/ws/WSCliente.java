@@ -1,4 +1,3 @@
-
 package ws;
 
 import java.util.List;
@@ -14,19 +13,16 @@ import modelo.pojo.RespuestaCliente;
 @Path("cliente")
 public class WSCliente {
 
-@Path("/{correo}")
-@GET
-@Produces(MediaType.APPLICATION_JSON)
-public RespuestaCliente loginColaborador(@PathParam("correo") String correo) {
-    RespuestaCliente clienteRest = ClienteDAO.ClientePorCorreo(correo);
-
-    if (clienteRest.getCliente() == null) {
-        return new RespuestaCliente(true, "Cliente no encontrado", null);
+    @Path("/{correo}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public RespuestaCliente loginColaborador(@PathParam("correo") String correo) {
+        RespuestaCliente clienteRest = ClienteDAO.ClientePorCorreo(correo);
+        if (clienteRest.getCliente() == null) {
+            return new RespuestaCliente(true, "Cliente no encontrado", null);
+        }
+        return clienteRest;
     }
-
-    return clienteRest;
-}
-
 
     @Path("todos")
     @GET
@@ -34,6 +30,5 @@ public RespuestaCliente loginColaborador(@PathParam("correo") String correo) {
     public List<Cliente> loginColaborador() {
         return ClienteDAO.listaClientes();
     }
-    
-    
+
 }
