@@ -2,7 +2,7 @@ package modelo.pojo;
 
 public class Cliente {
 
-    private int idCliente;
+    private Integer idCliente;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -12,12 +12,14 @@ public class Cliente {
     private float estatura;
     private String correo;
     private String password;
-    private int idColaborador;
+    private Integer idColaborador;
+    private String entrenador;
+    private String fotoBase64;
 
     public Cliente() {
     }
 
-    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String telefono, float peso, float estatura, String correo, String password, int idColaborador) {
+    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String telefono, float peso, float estatura, String correo, String password, Integer idColaborador, String entrenador, String fotoBase64) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -29,13 +31,15 @@ public class Cliente {
         this.correo = correo;
         this.password = password;
         this.idColaborador = idColaborador;
+        this.entrenador = entrenador;
+        this.fotoBase64 = fotoBase64;
     }
 
-    public int getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -111,17 +115,34 @@ public class Cliente {
         this.password = password;
     }
 
-    public int getIdColaborador() {
+    public Integer getIdColaborador() {
         return idColaborador;
     }
 
-    public void setIdColaborador(int idColaborador) {
+    public void setIdColaborador(Integer idColaborador) {
         this.idColaborador = idColaborador;
+    }
+
+    public String getEntrenador() {
+        return entrenador;
+    }
+
+    public void setEntrenador(String entrenador) {
+        this.entrenador = entrenador;
+    }
+
+    public String getFotoBase64() {
+        return fotoBase64;
+    }
+
+    public void setFotoBase64(String fotoBase64) {
+        this.fotoBase64 = fotoBase64;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", telefono=" + telefono + ", peso=" + peso + ", estatura=" + estatura + ", correo=" + correo + ", password=" + password + ", idColaborador=" + idColaborador + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", telefono=" + telefono + ", peso=" + peso + ", estatura=" + estatura + ", correo=" + correo + ", password=" + password + ", idColaborador=" + idColaborador + ", entrenador=" + entrenador + ", fotoBase64=" + fotoBase64 + '}';
     }
+
 
 }

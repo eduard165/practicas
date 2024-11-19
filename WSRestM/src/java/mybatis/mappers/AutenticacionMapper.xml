@@ -16,4 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN rol r ON r.idRol = c.idRol
         WHERE c.numeroPersonal = #{numeroPersonal} AND c.password = #{password}
     </select>
+    <select id="verificarCredencialesClientes"  resultType="modelo.pojo.Cliente">
+        SELECT cli.idCliente, cli.nombre, cli.apellidoPaterno, cli.apellidoMaterno, cli.fechaNacimiento, cli.telefono, cli.peso, cli.estatura, cli.correo, cli.password, cli.fechaInscripcion,
+        CONCAT(col.nombre, ' ', col.apellidoPaterno, ' ', col.apellidoMaterno) AS entrenador
+        FROM cliente AS cli
+        INNER JOIN colaborador AS col ON cli.idColaborador = col.idColaborador
+        WHERE cli.correo = #{correo} AND cli.password = #{password};    
+    </select>
 </mapper>

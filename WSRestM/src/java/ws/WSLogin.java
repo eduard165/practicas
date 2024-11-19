@@ -13,7 +13,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import modelo.AutenticacionDAO;
+import modelo.pojo.Cliente;
 import modelo.pojo.Colaborador;
+import modelo.pojo.RespuestaCliente;
 import modelo.pojo.RespuestaColaborador;
 
 
@@ -50,4 +52,13 @@ public class WSLogin {
 
         return Response.ok(jsonResultado, MediaType.APPLICATION_JSON).build();
     }
+    
+    @Path("cliente")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public RespuestaCliente loginCliente(@FormParam("correo") String correo, @FormParam("password") String password) {
+        return AutenticacionDAO.verificarSesionCliente(correo, password);
+    }
+
 }

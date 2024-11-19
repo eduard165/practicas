@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?> 
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -8,8 +8,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT * FROM cliente
         WHERE correo = #{correo} 
     </select>
-    <select id="obtenerClientes"  resultType="modelo.pojo.Cliente">
+    
+    <select id="obtenerClientes" resultType="modelo.pojo.Cliente">
         SELECT * FROM cliente
     </select>
  
+    <update id="guardarFoto" parameterType="map">
+        UPDATE cliente
+        SET foto = #{foto}
+        WHERE idCliente = #{idCliente}
+    </update>
+    
+    <select id="obtenerFoto" parameterType="int" resultType="modelo.pojo.Cliente">
+        SELECT idCliente, nombre, apellidoPaterno, apellidoMaterno, TO_BASE64(foto) as fotoBase64
+        FROM cliente WHERE idCliente = #{idCliente}
+    </select>
+
+    <update id="editarCliente" parameterType="modelo.pojo.Cliente">
+        UPDATE cliente
+        SET 
+            nombre = #{nombre},
+            apellidoPaterno = #{apellidoPaterno},
+            apellidoMaterno = #{apellidoMaterno},
+            fechaNacimiento = #{fechaNacimiento},
+            numeroPersonal = #{numeroPersonal},
+            telefono = #{telefono},
+            peso = #{peso},
+            estatura = #{estatura},
+            rfc = #{rfc},
+            curp = #{curp},
+            idRol = #{idRol},
+            rol = #{rol}
+        WHERE idCliente = #{idCliente}
+    </update>
+
 </mapper>

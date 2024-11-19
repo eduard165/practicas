@@ -11,7 +11,7 @@ import modelo.pojo.RespuestaColaborador;
 
 public class AutenticacionDAO {
 
-    public static RespuestaCliente verificarSesionCliente(Cliente cliente) {
+    public static RespuestaCliente verificarSesionCliente(String correo, String password) {
         RespuestaCliente respuesta = new RespuestaCliente();
         respuesta.setError(true);
 
@@ -19,8 +19,14 @@ public class AutenticacionDAO {
 
         if (conexionBD != null) {
             try {
+                HashMap<String, String> parametros = new LinkedHashMap<>();
+                parametros.put("correo", correo);
+                parametros.put("password", password);
 
-                Cliente clienteRest = conexionBD.selectOne("autenticacion.verificarCredencialesCliente", cliente);
+                System.out.println(parametros.get(correo));
+                System.out.println(parametros.get(password));
+
+                Cliente clienteRest = conexionBD.selectOne("autenticacion.verificarCredencialesClientes", parametros);
 
                 if (clienteRest != null) {
                     respuesta.setError(false);
@@ -98,7 +104,7 @@ public class AutenticacionDAO {
             } catch (Exception e) {
                 respuesta.put("error", true);
                 respuesta.put("mensaje", e.getMessage());
-            }finally {
+            } finally {
                 conexionDB.close();
             }
         } else {
